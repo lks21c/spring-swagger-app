@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<title>Jmeter Dashboard</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/bootstrap-3.3.4/css/bootstrap.min.css" />
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="/bootstrap-3.3.4/css/bootstrap-theme.min.css" />
+
+<link rel="stylesheet"
+	href="http://getbootstrap.com/assets/css/docs.min.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<!-- Docs page layout -->
+	<div class="bs-docs-header" id="content" tabindex="-1">
+		<div class="container">
+			<h1>JMeter 대시보드</h1>
+			<p>일별로 JMeter 성능 테스트를 자동화 함.</p>
+			<span th:text="${dateString}"></span>
+
+			<ul class="nav nav-pills" layout:fragment="menu">
+				<li role="presentation" class="active"><a href="?category=멜론_모바일">멜론_모바일</a></li>
+				<li role="presentation"><a href="#">멜론_아이폰</a></li>
+				<li role="presentation"><a href="#">멜론_웹</a></li>
+				<li role="presentation"><a href="#">아지톡</a></li>
+				<li role="presentation"><a href="#">쇼핑</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="container bs-docs-container">
+		<div layout:fragment="body" ></div>
+	</div>
+</body>
+</html>

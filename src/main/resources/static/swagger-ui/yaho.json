@@ -1,0 +1,144 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Test API",
+        "description": "Test Api description",
+        "version": "2016.1.12"
+    },
+    "host": "lks21c.blogspot.com",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/info.json": {
+            "get": {
+                "summary": "summary",
+                "description": "description\n",
+                "parameters": [
+                    {
+                        "name": "Cookie",
+                        "in": "header",
+                        "type": "string",
+                        "required": true,
+                        "description": "Cookie",
+                        "default": "Cookie"
+                    },
+                    {
+                        "name": "User-Agent",
+                        "in": "header",
+                        "type": "string",
+                        "description": "User Agent",
+                        "required": true,
+                        "default": "UA"
+                    },
+                    {
+                        "name": "v",
+                        "in": "query",
+                        "description": "Protocol Version",
+                        "required": true,
+                        "type": "string",
+                        "default": "4.0"
+                    },
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "key",
+                        "required": true,
+                        "type": "string",
+                        "default": "defaultKey"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "type",
+                        "required": true,
+                        "type": "number",
+                        "format": "int",
+                        "default": 1
+                    },
+                    {
+                        "name": "uid",
+                        "in": "query",
+                        "description": "uid",
+                        "required": true,
+                        "type": "number",
+                        "format": "int",
+                        "default": 4016085
+                    }
+                ],
+                "tags": [
+                    "Tag1"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of products",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/response"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "response": {
+            "type": "object",
+            "properties": {
+                "INFO": {
+                    "type": "object",
+                    "properties": {
+                        "KEY1": {
+                            "type": "string"
+                        },
+                        "KEY2": {
+                            "type": "string"
+                        },
+                        "ARR": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "ARRKEY1": {
+                                        "type": "string"
+                                    },
+                                    "ARRKEY2": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "RESULT": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

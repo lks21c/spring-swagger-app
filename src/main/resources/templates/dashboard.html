@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+
+
+<ul class="nav nav-pills" layout:fragment="menu">
+	<li role="presentation" class="active" th:if="${category} == 멜론_모바일"><a href="?category=멜론_모바일">멜론_모바일</a></li>
+	<li role="presentation" th:unless="${category} == 멜론_모바일"><a href="?category=멜론_모바일">멜론_모바일</a></li>
+	
+	<li role="presentation" class="active" th:if="${category} == 멜론_아이폰"><a href="?category=멜론_아이폰">멜론_아이폰</a></li>
+	<li role="presentation" th:unless="${category} == 멜론_아이폰"><a href="?category=멜론_아이폰">멜론_아이폰</a></li>
+	
+	<li role="presentation" class="active" th:if="${category} == 멜론_웹"><a href="?category=멜론_웹">
+	멜론_웹</a></li>
+	<li role="presentation" th:unless="${category} == 멜론_웹"><a href="?category=멜론_웹">멜론_웹</a></li>
+	
+	<li role="presentation" class="active" th:if="${category} == 멜론스토어_모바일"><a href="?category=멜론스토어_모바일">멜론스토어_모바일</a></li>
+	<li role="presentation" th:unless="${category} == 멜론스토어_모바일"><a href="?category=멜론스토어_모바일">멜론스토어_모바일</a></li>
+	
+	<li role="presentation" class="active" th:if="${category} == 멜론스토어_웹"><a href="?category=멜론스토어_웹">멜론스토어_웹</a></li>
+	<li role="presentation" th:unless="${category} == 멜론스토어_웹"><a href="?category=멜론스토어_웹">멜론스토어_웹</a></li>
+	
+	<li role="presentation" class="active" th:if="${category} == 아지톡_모바일"><a href="?category=아지톡_모바일">아지톡_모바일</a></li>
+	<li role="presentation" th:unless="${category} == 아지톡_모바일"><a href="?category=아지톡_모바일">아지톡_모바일</a></li>
+</ul>
+
+<div layout:fragment="body">
+
+	<div class="bs-callout bs-callout-danger"
+		id="callout-tables-striped-ie8">
+		<h4>성능 리포트 요약</h4>
+		<p>하기의 테이블로 RTT와 TPS를 확인 하실 수 있습니다. <br />
+		RTT는 서비스 품질, TPS는 WAS 성능과 관계 있습니다.</p>
+	</div>
+	
+	<div class="bs-callout bs-callout-danger" id="callout-xref-input-group">
+			<h4 id="input-groups">
+				<span>측정방법</span>
+			</h4>
+			<p>쓰레드를 아래와 같이 시간 순서대로 투입하여 측정합니다.</p>
+	</div>
+	<img src="/measurement.png" width="1150" height="400" /> <br /><br />  
+
+	<div class="bs-callout bs-callout-danger" id="callout-xref-input-group">
+			<h4 id="input-groups">
+				<span>측정 결과 정리표</span>
+			</h4>
+			<p></p>
+	</div>
+	
+	<div>
+		<table class="table table-bordered">
+			<thead>
+				<td><b>이름</b></td>
+				<td><b>Response Time(ms)</b></td>
+				<td><b>TPS</b></td>
+			</thead>
+			<tr th:each="testCase : ${testCaseFileList}">
+				<td th:text="${testCase.getTestCaseName()}">1</td>
+				<td th:text="${testCase.getPerformanceValueList().get(0).getRtt()}">1</td>
+				<td th:text="${testCase.getPerformanceValueList().get(0).getTps()}">1</td>
+			</tr>
+		</table>
+	</div>
+
+	<div th:each="testCase : ${testCaseFileList}">
+
+		<div class="bs-callout bs-callout-danger" id="callout-xref-input-group">
+			<h4 id="input-groups">
+				<span th:text="${testCase.getTestCaseName()}"></span>
+			</h4>
+			<p></p>
+		</div>
+
+
+		<span class="label label-success">RTT</span> <br /> <span
+			th:each="rttFile : ${testCase.getRttFileNameList()}"> <!-- <span th:text="${rttFile.getDate()}"></span>-->
+			<img th:src="${rttFile.getFileName()}" />
+		</span> &nbsp; <br />
+		<br />
+		<p class="label label-warning">TPS</p>
+		<br /> <span th:each="tpsFile : ${testCase.getTpsFileNameList()}">
+			<!-- <span th:text="${tpsFile.getDate()}"></span>--> <img
+			th:src="${tpsFile.getFileName()}" />
+		</span> <br /> <br />
+	</div>
+
+</div>
+
+</html>
